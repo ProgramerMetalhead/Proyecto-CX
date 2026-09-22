@@ -1,0 +1,309 @@
+@import "tailwindcss";
+
+@theme {
+  --font-storybook: 'Berkshire Swash', cursive, Georgia, serif;
+  --font-handwriting: 'Patrick Hand', cursive, sans-serif;
+  --font-script: 'Sacramento', cursive;
+  --font-signature: 'Caveat', cursive;
+  --font-sans: 'Quicksand', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+:root {
+  font-family: 'Quicksand', sans-serif;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  background: #020d18;
+  color: #3b281c;
+  overflow-x: hidden;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Custom whimsical animations */
+@keyframes floatSlow {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-8px) rotate(1.5deg);
+  }
+}
+
+@keyframes gentlePulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.95;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 1;
+  }
+}
+
+@keyframes twinkle {
+  0%, 100% {
+    opacity: 0.25;
+    transform: scale(0.8) rotate(0deg);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.25) rotate(45deg);
+  }
+}
+
+/* 3D Cover Flap Rotations */
+@keyframes coverFlapOpenAnim {
+  0% {
+    transform: rotateY(0deg);
+  }
+  100% {
+    transform: rotateY(-180deg);
+  }
+}
+
+@keyframes coverFlapCloseAnim {
+  0% {
+    transform: rotateY(-180deg);
+  }
+  100% {
+    transform: rotateY(0deg);
+  }
+}
+
+/* Strict Face Switching during Opening / Closing to prevent bleed-through */
+@keyframes frontFaceOpenAnim {
+  0%, 48% {
+    opacity: 1;
+    visibility: visible;
+  }
+  49%, 100% {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+@keyframes frontFaceCloseAnim {
+  0%, 48% {
+    opacity: 0;
+    visibility: hidden;
+  }
+  49%, 100% {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+@keyframes backFaceOpenAnim {
+  0%, 48% {
+    opacity: 0;
+    visibility: hidden;
+  }
+  49%, 100% {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+@keyframes backFaceCloseAnim {
+  0%, 48% {
+    opacity: 1;
+    visibility: visible;
+  }
+  49%, 100% {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+/* 3D Page Turn Keyframes */
+@keyframes pageTurnNextAnim {
+  0% {
+    transform: rotateY(0deg);
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.15));
+  }
+  50% {
+    transform: rotateY(-90deg) scale(1.015);
+    filter: drop-shadow(-15px 15px 30px rgba(0, 0, 0, 0.35));
+  }
+  100% {
+    transform: rotateY(-180deg);
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.15));
+  }
+}
+
+@keyframes pageTurnPrevAnim {
+  0% {
+    transform: rotateY(-180deg);
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.15));
+  }
+  50% {
+    transform: rotateY(-90deg) scale(1.015);
+    filter: drop-shadow(15px 15px 30px rgba(0, 0, 0, 0.35));
+  }
+  100% {
+    transform: rotateY(0deg);
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.15));
+  }
+}
+
+.cover-flap-open {
+  animation: coverFlapOpenAnim 0.8s cubic-bezier(0.34, 1.15, 0.64, 1) forwards;
+  transform-origin: left center;
+  transform-style: preserve-3d;
+}
+
+.cover-flap-close {
+  animation: coverFlapCloseAnim 0.8s cubic-bezier(0.34, 1.15, 0.64, 1) forwards;
+  transform-origin: left center;
+  transform-style: preserve-3d;
+}
+
+.front-face-opening {
+  animation: frontFaceOpenAnim 0.8s forwards;
+}
+
+.front-face-closing {
+  animation: frontFaceCloseAnim 0.8s forwards;
+}
+
+.back-face-opening {
+  animation: backFaceOpenAnim 0.8s forwards;
+}
+
+.back-face-closing {
+  animation: backFaceCloseAnim 0.8s forwards;
+}
+
+.page-turn-next-anim {
+  animation: pageTurnNextAnim 0.65s cubic-bezier(0.34, 1.1, 0.64, 1) forwards;
+  transform-origin: left center;
+  transform-style: preserve-3d;
+}
+
+.page-turn-prev-anim {
+  animation: pageTurnPrevAnim 0.65s cubic-bezier(0.34, 1.1, 0.64, 1) forwards;
+  transform-origin: left center;
+  transform-style: preserve-3d;
+}
+
+.animate-float-slow {
+  animation: floatSlow 5s ease-in-out infinite;
+}
+
+.animate-gentle-pulse {
+  animation: gentlePulse 3s ease-in-out infinite;
+}
+
+.animate-twinkle {
+  animation: twinkle 3s ease-in-out infinite;
+}
+
+/* Brown Hardcover Leather Texture */
+.brown-leather-cover {
+  background: radial-gradient(circle at 35% 30%, #582e18 0%, #3d1f10 50%, #241107 100%);
+  box-shadow: 
+    inset 0 0 45px rgba(0, 0, 0, 0.85),
+    inset 0 0 15px rgba(245, 158, 11, 0.15),
+    0 25px 60px -10px rgba(0, 0, 0, 0.85),
+    0 0 0 1px rgba(180, 83, 9, 0.4);
+}
+
+.brown-leather-back {
+  background: radial-gradient(circle at 50% 50%, #442212 0%, #2d150a 60%, #1a0b05 100%);
+  box-shadow: 
+    inset 0 0 35px rgba(0, 0, 0, 0.9),
+    0 25px 60px -15px rgba(0, 0, 0, 0.85),
+    0 0 0 2px rgba(180, 83, 9, 0.35);
+}
+
+/* Stitched Leather Edge Line */
+.leather-stitch {
+  border: 1.5px dashed rgba(245, 158, 11, 0.45);
+}
+
+/* Layered Paper Edge (pages inside a closed thick book) */
+.book-pages-block-right {
+  background: repeating-linear-gradient(
+    to bottom,
+    #faf5e8,
+    #faf5e8 3px,
+    #ebd9b2 4px,
+    #d9c59a 5px
+  );
+  box-shadow: 
+    inset 2px 0 6px rgba(0, 0, 0, 0.35),
+    inset 0 2px 3px rgba(0, 0, 0, 0.15),
+    inset 0 -2px 3px rgba(0, 0, 0, 0.15);
+}
+
+.book-pages-block-bottom {
+  background: repeating-linear-gradient(
+    to right,
+    #faf5e8,
+    #faf5e8 3px,
+    #ebd9b2 4px,
+    #d9c59a 5px
+  );
+  box-shadow: 
+    inset 0 2px 6px rgba(0, 0, 0, 0.35);
+}
+
+/* Vintage Book Page Shadows & Textures */
+.parchment-texture {
+  background-color: #fcf8ee;
+  background-image: 
+    radial-gradient(#e6d8ba 0.75px, transparent 0.75px),
+    linear-gradient(to bottom, #fffdf8, #f8f0de);
+  background-size: 20px 20px, 100% 100%;
+}
+
+.book-shadow {
+  box-shadow: 
+    0 25px 65px -12px rgba(0, 0, 0, 0.9),
+    0 0 0 1px rgba(212, 175, 55, 0.3),
+    0 0 40px 3px rgba(16, 185, 129, 0.1);
+}
+
+/* Soft Book Center Crease Shadow */
+.book-crease-shadow {
+  background: linear-gradient(
+    to right,
+    rgba(70, 35, 10, 0.22) 0%,
+    rgba(70, 35, 10, 0.08) 35%,
+    rgba(70, 35, 10, 0.01) 50%,
+    rgba(70, 35, 10, 0.08) 65%,
+    rgba(70, 35, 10, 0.22) 100%
+  );
+}
+
+.book-spine-left {
+  box-shadow: inset -22px 0 25px -10px rgba(60, 30, 10, 0.18);
+}
+
+.book-spine-right {
+  box-shadow: inset 22px 0 25px -10px rgba(60, 30, 10, 0.18);
+}
+
+/* Custom scrollbar for inner letter */
+.custom-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+.custom-scroll::-webkit-scrollbar-track {
+  background: rgba(217, 119, 6, 0.08);
+  border-radius: 9999px;
+}
+.custom-scroll::-webkit-scrollbar-thumb {
+  background: rgba(180, 83, 9, 0.3);
+  border-radius: 9999px;
+}
+.custom-scroll::-webkit-scrollbar-thumb:hover {
+  background: rgba(180, 83, 9, 0.5);
+}
