@@ -343,7 +343,9 @@ export function CakeForgivenessScene({
   onSparkle,
   recipientName,
   isApologyAccepted,
-  onAcceptApology
+  onAcceptApology,
+  isMobile,
+  onSwitchToStory
 }) {
   const [thinkingCount, setThinkingCount] = useState(0)
   const [isThinking, setIsThinking] = useState(false)
@@ -423,6 +425,15 @@ export function CakeForgivenessScene({
             <div className="mt-2 text-xs font-['Caveat'] text-rose-800 font-bold text-sm">
               Con todo mi amor eterno, tu ternurín 💍🍓
             </div>
+            {isMobile && onSwitchToStory && (
+              <button
+                onClick={onSwitchToStory}
+                className="mt-3 py-1.5 px-4 rounded-full bg-gradient-to-r from-amber-600 to-rose-600 text-white text-xs font-bold inline-flex items-center gap-1.5 transition-all active:scale-95 shadow cursor-pointer"
+              >
+                <span>📖 Ver el final en la historia</span>
+                <span>➔</span>
+              </button>
+            )}
           </div>
         ) : (
           <div className="flex flex-col items-center">
